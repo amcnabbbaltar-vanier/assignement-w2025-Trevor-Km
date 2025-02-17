@@ -28,6 +28,8 @@ public class CharacterMovement : MonoBehaviour
     private bool jumpRequest; // Flag to check if the player requested a jump
     private Vector3 moveDirection; // Stores the calculated movement direction
 
+    private bool doubleJumpRequest;
+
     // ============================== Animation Variables ==============================
     [Header("Anim values")]
     public float groundSpeed; // Speed value used for animations
@@ -107,6 +109,10 @@ public class CharacterMovement : MonoBehaviour
         {
             jumpRequest = true;
         }
+
+        if(Input.GetButtonDown("Jump") && !IsGrounded){
+            doubleJumpRequest = true;
+        }
     }
 
     // ============================== Movement Handling ==============================
@@ -161,6 +167,11 @@ public class CharacterMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Apply force upwards
             jumpRequest = false; // Reset jump request after applying jump
+        }
+
+        if(doubleJumpRequest && !IsGrounded){
+            rb.AddForce(Vector3.up * (jumpForce+3), ForceMode.Impulse);
+            doubleJumpRequest = false;
         }
     }
 
