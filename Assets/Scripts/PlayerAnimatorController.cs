@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerAnimatorController : MonoBehaviour
 {
-    private Animator animator;
+    public Animator animator;
     private CharacterMovement movement;
     private Rigidbody rb;
     // Start is called before the first frame update
@@ -22,10 +22,5 @@ public class PlayerAnimatorController : MonoBehaviour
         animator.SetFloat("CharacterSpeed", rb.velocity.magnitude);
         animator.SetBool("IsGrounded", movement.IsGrounded);
         
-        if(animator.GetBool("IsGrounded") != true){
-            if(Input.GetKeyUp(KeyCode.Space) && movement.IsGrounded!=true){
-                animator.SetTrigger("doubleJump");
-            }
-        }
     }
 }

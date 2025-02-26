@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "assignement-w2025-Trevor-Km.sln"
+    "dotnet.defaultSolution": "assignement-w2025-Trevor-Km.sln",
+    "dotnet.preferCSharpExtension": true
 }

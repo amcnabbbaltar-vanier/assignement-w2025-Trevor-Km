@@ -28,8 +28,12 @@ public class CharacterMovement : MonoBehaviour
     private bool jumpRequest; // Flag to check if the player requested a jump
     private Vector3 moveDirection; // Stores the calculated movement direction
 
-    private bool doubleJumpRequest;
+    public bool canDoubleJump;
 
+    public bool doubleJumpRequest;
+    public int jumpCount;
+  
+    PlayerAnimatorController pac;
     // ============================== Animation Variables ==============================
     [Header("Anim values")]
     public float groundSpeed; // Speed value used for animations
@@ -63,6 +67,7 @@ public class CharacterMovement : MonoBehaviour
     private void Update()
     {
         RegisterInput(); // Collect player input
+        SetJumpCount();
     }
 
     /// <summary>
@@ -71,6 +76,7 @@ public class CharacterMovement : MonoBehaviour
     private void FixedUpdate()
     {
         HandleMovement(); // Process movement and physics-based updates
+        
     }
 
     // ============================== Initialization ==============================
@@ -85,6 +91,7 @@ public class CharacterMovement : MonoBehaviour
         rb.freezeRotation = true; // Prevent Rigidbody from rotating due to physics interactions
         rb.interpolation = RigidbodyInterpolation.Interpolate; // Smooth physics interpolation
 
+        pac = GetComponent<PlayerAnimatorController>();
         // Assign the main camera if available
         if (Camera.main)
             cameraTransform = Camera.main.transform;
@@ -103,16 +110,18 @@ public class CharacterMovement : MonoBehaviour
     {
         moveX = Input.GetAxis("Horizontal"); // Get horizontal movement input
         moveZ = Input.GetAxis("Vertical");   // Get vertical movement input
-
         // Register a jump request if the player presses the Jump button
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && IsGrounded)
         {
             jumpRequest = true;
+            jumpCount = 1;
         }
 
-        if(Input.GetButtonDown("Jump") && !IsGrounded){
+        if (Input.GetButtonDown("Jump") && !IsGrounded && canDoubleJump && jumpCount < 3){
             doubleJumpRequest = true;
+            jumpCount = 2;
         }
+       
     }
 
     // ============================== Movement Handling ==============================
@@ -126,6 +135,7 @@ public class CharacterMovement : MonoBehaviour
         HandleJump(); // Process jump input
         RotateCharacter(); // Rotate the character towards the movement direction
         MoveCharacter(); // Move the character using velocity-based movement
+        HandleDoubleJump();
     }
 
     /// <summary>
@@ -156,7 +166,11 @@ public class CharacterMovement : MonoBehaviour
             moveDirection = (forward * moveZ + right * moveX).normalized;
         }
     }
-
+    private void SetJumpCount(){
+       if(IsGrounded){
+        jumpCount = 0;
+       }
+    }
     /// <summary>
     /// Handles jumping by applying an impulse force if the character is grounded.
     /// </summary>
@@ -169,10 +183,16 @@ public class CharacterMovement : MonoBehaviour
             jumpRequest = false; // Reset jump request after applying jump
         }
 
-        if(doubleJumpRequest && !IsGrounded){
-            rb.AddForce(Vector3.up * (jumpForce+3), ForceMode.Impulse);
+    }
+
+    private void HandleDoubleJump(){
+       if(doubleJumpRequest && jumpCount == 2 && canDoubleJump){
+        float doubleJumpForce = jumpForce*2;
+        rb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse); 
             doubleJumpRequest = false;
-        }
+            pac.animator.SetTrigger("doubleJump");
+            jumpCount++;
+       }
     }
 
     /// <summary>
