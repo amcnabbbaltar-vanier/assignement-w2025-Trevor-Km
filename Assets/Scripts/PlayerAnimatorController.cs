@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerAnimatorController : MonoBehaviour
 {
+    //TODO: Add sound effect when player jumps
     public Animator animator;
     private CharacterMovement movement;
     private Rigidbody rb;

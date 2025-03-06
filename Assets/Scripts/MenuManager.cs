@@ -17,11 +17,6 @@ public class MenuManager : MonoBehaviour
         playButton = GameObject.Find("PlayButton").GetComponent<Button>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
 
     public void OnPointerEnter(PointerEventData eventData){
         playButton.image.sprite = playButtonHoverSprite;

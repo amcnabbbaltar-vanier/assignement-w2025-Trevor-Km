@@ -22,6 +22,8 @@ public class CharacterMovement : MonoBehaviour
     private Rigidbody rb; // Reference to the Rigidbody component
     private Transform cameraTransform; // Reference to the camera's transform
 
+    private float doubleJumpForce;
+
     // Input variables
     private float moveX; // Stores horizontal movement input (A/D or Left/Right Arrow)
     private float moveZ; // Stores vertical movement input (W/S or Up/Down Arrow)
@@ -187,7 +189,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void HandleDoubleJump(){
        if(doubleJumpRequest && jumpCount == 2 && canDoubleJump){
-        float doubleJumpForce = jumpForce*2;
+         doubleJumpForce = jumpForce*1.5f;
         rb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse); 
             doubleJumpRequest = false;
             pac.animator.SetTrigger("doubleJump");

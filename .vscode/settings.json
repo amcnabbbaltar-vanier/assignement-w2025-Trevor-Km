@@ -57,5 +57,6 @@
         "Temp/": true
     },
     "dotnet.defaultSolution": "assignement-w2025-Trevor-Km.sln",
-    "dotnet.preferCSharpExtension": true
+    "dotnet.preferCSharpExtension": true,
+    "editor.fontFamily": "Fira Code, 'monospace'"
 }
