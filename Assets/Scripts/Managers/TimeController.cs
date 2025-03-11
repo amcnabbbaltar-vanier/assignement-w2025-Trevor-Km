@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //TODO: Implement traps, levels
 public class TimeController : MonoBehaviour
@@ -23,7 +24,11 @@ public class TimeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time = Time.time;
+        if(SceneManager.GetActiveScene().buildIndex != 0){
+            time += Time.deltaTime;
+        }else{
+            time = 0;
+        }
         timeDisplay.text = $"Time: {(int) time}";
     }
 }
