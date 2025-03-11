@@ -11,15 +11,13 @@ public class GameManagerController : MonoBehaviour
     // Start is called before the first frame update
 
     void Awake(){
-        if(Instance == null){
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        
+        
     }
 
     void Start()
     {
-       
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
@@ -45,6 +43,9 @@ public class GameManagerController : MonoBehaviour
 
 public void QuitGame(){
     Debug.Log("Game has been exited");
+    GameObject player = GameObject.Find("Player");
+    Destroy(player);
+
     SceneManager.LoadScene(0);
     
 }

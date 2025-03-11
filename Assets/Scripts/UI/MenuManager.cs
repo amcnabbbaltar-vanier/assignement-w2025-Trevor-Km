@@ -14,7 +14,12 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playButton = GameObject.Find("PlayButton").GetComponent<Button>();
+       GameObject player = GameObject.Find("Player");
+       GameObject gameManager = GameObject.Find("GameManager");
+       Destroy(gameManager);
+       Destroy(player);
+       playButton = GameObject.Find("PlayButton").GetComponent<Button>();
+
     }
 
 

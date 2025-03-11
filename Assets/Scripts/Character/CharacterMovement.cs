@@ -1,5 +1,6 @@
 using UnityEngine;
 using Cinemachine;
+using System;
 
 [RequireComponent(typeof(Rigidbody))] // Ensures that a Rigidbody component is attached to the GameObject
 public class CharacterMovement : MonoBehaviour
@@ -39,6 +40,8 @@ public class CharacterMovement : MonoBehaviour
     public bool doubleJumpRequest; // Determines whether or not a jump boost is active
     public int jumpCount; // The number of jumps a player has performed consecutively
   
+    private static CharacterMovement instance;
+
     public AudioSource jumpSound; // Sound effect when a player jumps
     PlayerAnimatorController pac;
     // ============================== Animation Variables ==============================
@@ -65,7 +68,14 @@ public class CharacterMovement : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        InitializeComponents(); // Initialize Rigidbody and Camera reference
+        if(instance == null){
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }else{
+            Destroy(gameObject);
+        }
+        InitializeComponents();
+         // Initialize Rigidbody and Camera reference
     }
 
     /// <summary>
