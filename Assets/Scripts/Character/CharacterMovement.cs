@@ -39,6 +39,7 @@ public class CharacterMovement : MonoBehaviour
     public bool doubleJumpRequest; // Determines whether or not a jump boost is active
     public int jumpCount; // The number of jumps a player has performed consecutively
   
+    public AudioSource jumpSound; // Sound effect when a player jumps
     PlayerAnimatorController pac;
     // ============================== Animation Variables ==============================
     [Header("Anim values")]
@@ -96,8 +97,8 @@ public class CharacterMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>(); // Get the Rigidbody component
         rb.freezeRotation = true; // Prevent Rigidbody from rotating due to physics interactions
         rb.interpolation = RigidbodyInterpolation.Interpolate; // Smooth physics interpolation
-
         pac = GetComponent<PlayerAnimatorController>();
+        jumpSound = GetComponent<AudioSource>();
         // Assign the main camera if available
         if (Camera.main)
             cameraTransform = Camera.main.transform;
@@ -197,6 +198,7 @@ public class CharacterMovement : MonoBehaviour
         rb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse); 
             doubleJumpRequest = false;
             pac.animator.SetTrigger("doubleJump");
+            jumpSound.Play();
             jumpCount++;
        }
     }
