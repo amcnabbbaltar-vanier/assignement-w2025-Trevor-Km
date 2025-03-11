@@ -44,6 +44,7 @@ public class GameManagerController : MonoBehaviour
 public void QuitGame(){
     Debug.Log("Game has been exited");
     GameObject player = GameObject.Find("Player");
+    Destroy(this);
     Destroy(player);
     SceneManager.LoadScene(0);
     
