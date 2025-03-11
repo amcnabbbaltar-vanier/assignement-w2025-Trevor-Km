@@ -22,5 +22,10 @@ public class SpeedPowerFloater : MonoBehaviour
     {
         float newY = startPos.y + Mathf.Sin(Time.time * floatSpeed) * floatHeight;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z); 
+        float rotationSpeed = 50f;
+        Quaternion rotationY = Quaternion.AngleAxis(rotationSpeed * Time.deltaTime, Vector3.up);
+        Quaternion rotationX = Quaternion.AngleAxis(rotationSpeed * Time.deltaTime, Vector3.forward);
+        transform.rotation *= rotationY;
+        transform.rotation *= rotationX;
     }
 }

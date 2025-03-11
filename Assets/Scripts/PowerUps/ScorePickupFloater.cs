@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpPowerFloater : MonoBehaviour
+public class ScorePickupFloater : MonoBehaviour
 {
-    public float floatSpeed = 2f;
-    public float floatHeight = 3f;
+   public float floatSpeed = 1f;
+    public float floatHeight = 1f;
 
     private Vector3 startPos;
     // Start is called before the first frame update
@@ -24,7 +24,5 @@ public class JumpPowerFloater : MonoBehaviour
         Quaternion rotationX = Quaternion.AngleAxis(rotationSpeed * Time.deltaTime, Vector3.forward);
         transform.rotation *= rotationY;
         transform.rotation *= rotationX;
-    }
-
-    
+        }
 }

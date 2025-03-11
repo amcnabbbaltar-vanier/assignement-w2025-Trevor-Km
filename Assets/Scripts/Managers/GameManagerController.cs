@@ -11,7 +11,7 @@ public class GameManagerController : MonoBehaviour
     // Start is called before the first frame update
 
     void Awake(){
-        
+        DontDestroyOnLoad(this);
         
     }
 
@@ -45,7 +45,6 @@ public void QuitGame(){
     Debug.Log("Game has been exited");
     GameObject player = GameObject.Find("Player");
     Destroy(player);
-
     SceneManager.LoadScene(0);
     
 }

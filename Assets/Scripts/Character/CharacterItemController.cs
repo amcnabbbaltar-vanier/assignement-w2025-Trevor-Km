@@ -34,6 +34,10 @@ public class CharacterItemController : MonoBehaviour
             speedParticles.Play();
             charmov.speedBoost = true;
             StartCoroutine(SpeedPowerTimer());
+        }else if(other.CompareTag("ScorePickup")){
+            Destroy(other.gameObject);
+        
+            gameObject.GetComponent<ScoreController>().score += 50;
         }
     }
 
