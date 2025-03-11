@@ -12,6 +12,7 @@ public class CharacterItemController : MonoBehaviour
 
    public ParticleSystem jumpParticles;
 
+    public ParticleSystem scoreParticles;
 
     public void Start()
     {
@@ -36,7 +37,7 @@ public class CharacterItemController : MonoBehaviour
             StartCoroutine(SpeedPowerTimer());
         }else if(other.CompareTag("ScorePickup")){
             Destroy(other.gameObject);
-        
+            scoreParticles.Play();
             gameObject.GetComponent<ScoreController>().score += 50;
         }
     }
