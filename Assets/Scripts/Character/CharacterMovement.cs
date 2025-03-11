@@ -22,7 +22,9 @@ public class CharacterMovement : MonoBehaviour
     private Rigidbody rb; // Reference to the Rigidbody component
     private Transform cameraTransform; // Reference to the camera's transform
 
-    private float doubleJumpForce;
+    private float doubleJumpForce; // Double Jump force while power-up is active
+
+   [SerializeField] private float speedBoostMultiplier = 2f; // Speed boost force while power-up is active 
 
     // Input variables
     private float moveX; // Stores horizontal movement input (A/D or Left/Right Arrow)
@@ -32,8 +34,10 @@ public class CharacterMovement : MonoBehaviour
 
     public bool canDoubleJump;
 
-    public bool doubleJumpRequest;
-    public int jumpCount;
+    public bool speedBoost; // Determines whether or not a speed boost is active
+
+    public bool doubleJumpRequest; // Determines whether or not a jump boost is active
+    public int jumpCount; // The number of jumps a player has performed consecutively
   
     PlayerAnimatorController pac;
     // ============================== Animation Variables ==============================
@@ -218,16 +222,30 @@ public class CharacterMovement : MonoBehaviour
     {
         // Determine movement speed (walking or running)
         float speed = IsRunning ? baseRunSpeed : baseWalkSpeed;
-        
+        // Used to set the new velocity of the character
+        Vector3 newVelocity;
+
         // Set ground speed value for animation purposes
         groundSpeed = (moveDirection != Vector3.zero) ? speed : 0.0f;
+       
+        
 
-        // Preserve the current Y velocity to maintain gravity effects
-        Vector3 newVelocity = new Vector3(
+        if(!speedBoost){
+            // Preserve the current Y velocity to maintain gravity effects
+            newVelocity = new Vector3(
             moveDirection.x * speed * speedMultiplier, 
             rb.velocity.y, // Keep the existing Y velocity for jumping & gravity
             moveDirection.z * speed * speedMultiplier
         );
+        }else{
+            // Preserve the current Y velocity to maintain gravity effects
+            newVelocity = new Vector3(
+            moveDirection.x * speed * speedBoostMultiplier, 
+            rb.velocity.y, // Keep the existing Y velocity for jumping & gravity
+            moveDirection.z * speed * speedBoostMultiplier
+        );
+        }
+        
 
         // Apply the new velocity directly
         rb.velocity = newVelocity;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+//TODO: Implement traps, levels
 public class TimeController : MonoBehaviour
 {
    public float time = 0f; // Start is called before the first frame update
