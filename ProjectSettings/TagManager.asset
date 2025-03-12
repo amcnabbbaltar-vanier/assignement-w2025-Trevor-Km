@@ -7,6 +7,7 @@ TagManager:
   - JumpPower
   - SpeedPower
   - ScorePickup
+  - Boundary
   layers:
   - Default
   - TransparentFX

@@ -49,8 +49,27 @@ public class GameManagerController : MonoBehaviour
 
     public void RestartLevel(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        pauseMenuPanel.SetActive(false);
+        HandlePauseGame();
+        if(SceneManager.GetActiveScene().buildIndex == 1){
+            GameObject player = GameObject.Find("Player");
+            GameObject cam = GameObject.Find("Camera");
+            GameObject freelook = GameObject.Find("FreeLook Camera");
+            GameObject eventSystem = GameObject.Find("EventSystem");
+            GameObject canvas = GameObject.Find("Canvas");
+            Destroy(eventSystem);
+            Destroy(canvas);
+            Destroy(gameObject);
+            Destroy(cam);
+            Destroy(freelook);
+            Destroy(player);
+        }
+    }
 
+
+    public void ResetLevel(){
+        GameObject player = GameObject.Find("Player");
+        player.transform.position = new Vector3(0, 0, 0);
+        player.GetComponent<PlayerHealth>().TakeDamage();
     }
 
 public void QuitGame(){

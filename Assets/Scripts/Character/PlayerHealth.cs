@@ -18,7 +18,24 @@ public class PlayerHealth : MonoBehaviour
     {
      currentHealth = maxHealth;
      healthBar.maxValue = maxHealth;
-     healthBar.value = currentHealth+1;
+     healthBar.value = currentHealth;
+    }
+
+    void Update(){
+        healthBar.value = currentHealth;
+        if(currentHealth == 0){
+            TransitionToGameOver();
+        }
+    }
+
+
+    public void TakeDamage(){
+        currentHealth -= 1;
+    }
+
+    public void TransitionToGameOver(){
+        GameObject gameManager = GameObject.Find("GameManager");
+        gameManager.GetComponent<GameManagerController>().QuitGame();
     }
 
     
