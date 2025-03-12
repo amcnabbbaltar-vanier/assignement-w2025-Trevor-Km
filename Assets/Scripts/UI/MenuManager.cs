@@ -18,6 +18,7 @@ public class MenuManager : MonoBehaviour
        GameObject gameManager = GameObject.Find("GameManager");
        gameManager.GetComponent<TimeController>().time = 0f;
        Destroy(player);
+       Destroy(gameManager);
        playButton = GameObject.Find("PlayButton").GetComponent<Button>();
 
     }
