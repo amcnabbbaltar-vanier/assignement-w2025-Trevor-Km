@@ -23,43 +23,47 @@ public class CharacterItemController : MonoBehaviour
     {
         if (other.CompareTag("JumpPower"))
         {
-            Destroy(other.gameObject);
-        
+            other.gameObject.SetActive(false);
             jumpParticles.Play();
             charmov.canDoubleJump = true;
-            StartCoroutine(JumpPowerTimer());
+            StartCoroutine(JumpPowerTimer(other));
         }
         else if (other.CompareTag("SpeedPower"))
         {
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
             speedParticles.Play();
             charmov.speedBoost = true;
-            StartCoroutine(SpeedPowerTimer());
+            StartCoroutine(SpeedPowerTimer(other));
         }else if(other.CompareTag("ScorePickup")){
             Destroy(other.gameObject);
             scoreParticles.Play();
-            gameObject.GetComponent<ScoreController>().score += 50;
+            ScoreController.score += 50;
         }
     }
 
 
 
 
-    IEnumerator JumpPowerTimer()
+    IEnumerator JumpPowerTimer(Collider other)
     {
         yield return new WaitForSeconds(30f);
         charmov.canDoubleJump = false;
         Debug.Log("Jump Power Done");
-
+        if(other != null){
+            other.gameObject.SetActive(true);
+        }
+        
     }
 
 
-    IEnumerator SpeedPowerTimer()
+    IEnumerator SpeedPowerTimer(Collider other)
     {
         yield return new WaitForSeconds(5f);
         charmov.speedBoost = false;
         Debug.Log("Speed Power Done.");
-
+        if(other!=null){
+            other.gameObject.SetActive(true);
+        }
     }
 
 }

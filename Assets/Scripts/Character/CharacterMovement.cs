@@ -2,6 +2,7 @@ using UnityEngine;
 using Cinemachine;
 using System;
 
+
 [RequireComponent(typeof(Rigidbody))] // Ensures that a Rigidbody component is attached to the GameObject
 public class CharacterMovement : MonoBehaviour
 {
@@ -262,4 +263,10 @@ public class CharacterMovement : MonoBehaviour
         // Apply the new velocity directly
         rb.velocity = newVelocity;
     }
+
+    public void GotHit(){
+        rb.AddForce(Vector3.back * 5, ForceMode.Impulse);
+    }
+
+
 }

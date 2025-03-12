@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 //TODO: Implement traps, levels
 public class TimeController : MonoBehaviour
 {
-   public float time = 0f; // Start is called before the first frame update
+   public static float time = 0f; // Start is called before the first frame update
 
    TMP_Text timeDisplay;
     

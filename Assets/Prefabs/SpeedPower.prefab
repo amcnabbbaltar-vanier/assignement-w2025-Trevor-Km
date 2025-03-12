@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5569851016146332800}
   - component: {fileID: 4307682000913733625}
   - component: {fileID: 4611849024851444972}
+  - component: {fileID: 2218004446380474213}
   m_Layer: 0
   m_Name: SpeedPower
-  m_TagString: Untagged
+  m_TagString: SpeedPower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8615470266014782592}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8087715, y: 0.35568404, z: 1.9848214}
+  m_LocalPosition: {x: -1.5587715, y: 1.137, z: 1.9848214}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -99,9 +100,23 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2218004446380474213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8615470266014782592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 543e6d377fe59e7439aee5d045ba4898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatSpeed: 8
+  floatHeight: 0.5

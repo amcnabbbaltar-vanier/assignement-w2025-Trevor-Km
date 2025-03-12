@@ -35,7 +35,16 @@ public class PlayerHealth : MonoBehaviour
 
     public void TransitionToGameOver(){
         GameObject gameManager = GameObject.Find("GameManager");
-        gameManager.GetComponent<GameManagerController>().QuitGame();
+        Destroy(GameObject.Find("Player"));
+        Destroy(GameObject.Find("Canvas"));
+        Destroy(GameObject.Find("Camera"));
+        Destroy(GameObject.Find("GameManager"));
+        Destroy(GameObject.Find("EventSystem"));        
+                    
+        gameManager.GetComponent<GameManagerController>().RestartGame();
+        currentHealth = maxHealth;
+        ScoreController.score = 0;
+        gameObject.transform.position = new Vector3(0,0,0);
     }
 
     

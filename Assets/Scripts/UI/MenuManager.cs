@@ -16,11 +16,10 @@ public class MenuManager : MonoBehaviour
     {
        GameObject player = GameObject.Find("Player");
        GameObject gameManager = GameObject.Find("GameManager");
-       gameManager.GetComponent<TimeController>().time = 0f;
+       TimeController.time = 0f;
        Destroy(player);
        Destroy(gameManager);
        playButton = GameObject.Find("PlayButton").GetComponent<Button>();
-
     }
 
 
