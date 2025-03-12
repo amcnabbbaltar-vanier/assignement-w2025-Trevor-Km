@@ -13,7 +13,7 @@ public class QuitButtonController : MonoBehaviour, IPointerEnterHandler, IPointe
     // Start is called before the first frame update
     void Start()
     {
-        playButton = GameObject.Find("QuitButton").GetComponent<Button>();
+        playButton = GameObject.Find("MenuQuitButton").GetComponent<Button>();
         playButton.onClick.AddListener(ExitGame);
     }
 
